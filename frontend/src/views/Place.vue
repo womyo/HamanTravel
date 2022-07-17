@@ -1,16 +1,16 @@
 <template>
   <div class="place">
-    <RestaurantsVue></RestaurantsVue>
+    <Restaurants></Restaurants>
   </div>
 </template>
 
 <script>
-import RestaurantsVue from '@/components/Restaurants'
+import Restaurants from '@/components/Restaurants'
 
 export default {
   name: 'PlaceView',
   components: {
-    RestaurantsVue
+    Restaurants
   },
 }
 </script>

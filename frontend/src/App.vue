@@ -1,15 +1,19 @@
 <template>
-  <router-view/>  
-  <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button> -->
+  <div id="app">
+    <Header></Header>
+    <section class="section">
+      <router-view/>
+    </section>
+  </div>  
 </template>
 
 <script>
+import Header from './components/Header'
 
 export default {
   name: 'App',
   components: {
+    Header
   },
 }
 </script>
@@ -21,6 +25,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
