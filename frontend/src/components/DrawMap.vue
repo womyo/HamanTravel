@@ -9,8 +9,9 @@
             @onLoad="onLoadMap($event)"
             >
                 <naver-marker
-                :latitude="35.2657835740339"
-                :longitude="128.4503473084113"
+                v-for="place in places"
+                :latitude=place.latitude
+                :longitude=place.longitude
                 @onLoad="onLoadMarker($event)">
                 </naver-marker>
             </naver-maps>
@@ -53,6 +54,7 @@ export default {
                 origin: new window.naver.maps.Point(0, 0),
                 anchor: new window.naver.maps.Point(25, 26)
             })
+            
         };
         const bounds = {
             south: 35.16416340349245,
@@ -83,6 +85,10 @@ export default {
             initLayers,
             onLoadMap,
             onLoadMarker,
+            places: [
+                {latitude: 35.2657835740339, longitude: 128.4503473084113},
+                // {latitude: 35.2757835740339, longitude: 128.4703473084113}
+            ]
         }
     },
     mounted() {
