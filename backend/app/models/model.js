@@ -22,8 +22,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
     },{
-        charset: "utf8", // 한국어 설정
-        collate: "utf8_general_ci", // 한국어 설정
+        charset: "utf8",
+        collate: "utf8_general_ci",
         timestamps: false
     });
 

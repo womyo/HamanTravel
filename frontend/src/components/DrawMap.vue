@@ -31,6 +31,7 @@
 <script>
 import { ref } from "vue";
 import { NaverMaps, NaverMarker } from "vue3-naver-maps";
+import axios from 'axios';
 
 export default {
     components: {
@@ -40,8 +41,8 @@ export default {
     data() {
         const map = ref();
         const onLoadMap = (mapObject) => {
-            map.value = mapObject; // map에 반환된 객체 저장
-            map.value.setCenter(new window.naver.maps.LatLng(35.28577217913653, 128.4503580941007)); // 지도 중앙 변경
+            map.value = mapObject;
+            map.value.setCenter(new window.naver.maps.LatLng(35.28577217913653, 128.4503580941007));
 
         };
         const marker = ref();
@@ -63,8 +64,6 @@ export default {
             east: 128.59121454032442,
         };
         const mapOptions = {
-            // latitude: 35.3075, // 지도 중앙 위도
-            // longitude: 128.406, // 지도 중앙 경도
             zoom: 12,
             zoomControl: false,
             zoomControlOptions: { position: "TOP_RIGHT" },
@@ -85,13 +84,15 @@ export default {
             initLayers,
             onLoadMap,
             onLoadMarker,
-            places: [
-                {latitude: 35.2657835740339, longitude: 128.4503473084113},
-                // {latitude: 35.2757835740339, longitude: 128.4703473084113}
-            ]
+            places: null,
         }
     },
     mounted() {
+        axios.get('/api/places')
+            .then(res => {
+                this.places = res.data
+                console.log(res.data)
+            })
     },
     methods: {
     },
