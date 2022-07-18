@@ -1,4 +1,3 @@
-// controllers/tutorial.controller.js
 const db = require("../models");
 const Place = db.places;
 const Op = db.Sequelize.Op;
@@ -31,7 +30,6 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const id = req.query.id;
   var condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
