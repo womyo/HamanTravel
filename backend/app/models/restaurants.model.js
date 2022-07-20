@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const restaurant =  sequelize.define("restaurant", {
+    const restaurants =  sequelize.define("restaurant", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -28,5 +28,5 @@ module.exports = (sequelize, Sequelize) => {
         timestamps: false
     });
 
-    return restaurant;
+    return restaurants;
   };
