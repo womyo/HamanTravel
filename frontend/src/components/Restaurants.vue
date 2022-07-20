@@ -21,7 +21,7 @@ export default {
   created() {
     fetchRestaurantList()
     .then((response) => (
-        console.log(response.data.data),
+        console.log(response.data),
         this.restaurants = response.data.data
         ))
   }
