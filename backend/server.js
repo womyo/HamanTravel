@@ -14,7 +14,9 @@ const db = require("./app/models");
 
 db.sequelize.sync({force: false})
 
-require("./app/routes/place.routes")(app);
+require("./app/routes/places.route")(app);
+
+require("./app/routes/restaurants.route")(app);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
