@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const places =  sequelize.define("place", {
+    const place =  sequelize.define("place", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -31,5 +31,5 @@ module.exports = (sequelize, Sequelize) => {
         timestamps: false
     });
 
-    return places;
+    return place;
   };

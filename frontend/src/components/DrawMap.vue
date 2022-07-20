@@ -10,8 +10,8 @@
     <div class="outer">
         <div class="map">
             <naver-maps
-                :width = this.width
-                :height = this.height
+                :width = width
+                :height = height
                 :mapOptions = "mapOptions"
                 :initLayers = "initLayers"
                 @onLoad="onLoadMap($event)"
@@ -21,7 +21,7 @@
                     :latitude=place.latitude
                     :longitude=place.longitude
                     @onLoad="onLoadMarker($event)"
-                    @click="clicked(place.name)"
+                    @click="zoomPlace(place.latitude, place.longitude)"
                     @mouseover="isOpen = !isOpen, index = idx, getInfo(idx)"
                     @mouseout="isOpen = !isOpen"
                 >
@@ -32,6 +32,14 @@
                     :isOpen="isOpen"
                 >
                 </naver-info-window>
+                <naver-marker
+                    v-if="map && map.getZoom() >= 15"
+                    v-for="food in foods"
+                    :latitude=food.latitude
+                    :longitude=food.longitude
+                    @onLoad="onLoadFoodMarker($event)"
+                >
+                </naver-marker>
             </naver-maps>
         </div>
     </div>
@@ -52,12 +60,13 @@ export default {
         const map = ref();
         const marker = ref();
         const infoWindow = ref();
-        const isOpen = ref(false);
+        const foodMarker = ref();
 
         const onLoadMap = (mapObject) => {
             map.value = mapObject;
-            map.value.setCenter(new window.naver.maps.LatLng(35.31577217913653, 128.4303580941007));
-
+            map.value.setCenter(new window.naver.maps.LatLng(35.31577217913653, 128.4403580941007));
+            
+            this.map = map.value;
         };
         const onLoadMarker = (markerObject) => {
             marker.value = markerObject;
@@ -71,6 +80,19 @@ export default {
             
             this.markers.push(this.marker);
         };
+
+        const onLoadFoodMarker = (markerObject) => {
+            foodMarker.value = markerObject;
+            foodMarker.value.setIcon({
+                // url: "https://cdn.pixabay.com/photo/2018/08/30/16/57/coffee-3642712_1280.png",
+                url: "https://i.postimg.cc/jjPRt9J8/sample-removebg-preview.png",
+                size: new window.naver.maps.Size(50, 50),
+                scaledSize: new window.naver.maps.Size(50, 50),
+                origin: new window.naver.maps.Point(0, 0),
+                anchor: new window.naver.maps.Point(25, 26)
+            })
+        };
+
         const onLoadInfoWindow = (infoWindowObject) => {
             infoWindow.value = infoWindowObject;
             this.infoWindow = infoWindow
@@ -84,8 +106,10 @@ export default {
         };
         const mapOptions = {
             zoom: 12,
-            zoomControl: false,
-            zoomControlOptions: { position: "TOP_RIGHT" },
+            zoomControl: true,
+            zoomControlOptions: { 
+                position: "TOP_RIGHT"
+            },
             minZoom: 12,
             maxBounds: bounds
         }
@@ -101,20 +125,24 @@ export default {
             height: window.innerHeight -200 + 'px',
             mapOptions,
             initLayers,
-            onLoadMap,
-            onLoadMarker,
-            onLoadInfoWindow,
             places: null,
             keyword: '',
-            isOpen,
+            isOpen: false,
+            map,
             marker,
+            foodMarker,
+            foods: [],
             markers: [],
             index: null,
             infoWindow,
+            onLoadMap,
+            onLoadMarker,
+            onLoadInfoWindow,
+            onLoadFoodMarker,
         }
     },
     mounted() {
-        axios.get('/api/places')
+        axios.get('/api/place')
             .then(res => {
                 this.places = res.data
             })
@@ -123,7 +151,7 @@ export default {
         searchKeyword(){
             if (this.keyword !== '') {
                 this.places = []
-                const url = `/api/places/keyword/${this.keyword}`
+                const url = `/api/place/keyword/${this.keyword}`
                 axios.get(url)
                     .then(res => {
                         this.places = res.data
@@ -133,9 +161,6 @@ export default {
                 }
             }
             
-        },
-        clicked(name) {
-            console.log(name);
         },
         async getInfo(index) {
             await this.$nextTick(function(){
@@ -151,12 +176,17 @@ export default {
 
                 divParent.appendChild(imageTag)
                 divParent.appendChild(divTag)
-                // const imageTag = `<img class="coverImg" :src=/Users/leeinho/project/Travel/frontend/src/assets/logo.png>`
-                // const divTag = `<div class="infowindow-style" id="infowindow-style">${this.places[index].name}</div>`
-                // divParent.appendChild(imageTag)
-                // divParent.appendChild(divTag)
+
                 this.infoWindow.setContent(divParent)
             })
+        },
+        clicked(name) {
+            console.log(name);
+        },
+        zoomPlace(latitude, longitude) {
+            const zoomLevel = 15;
+            this.map.morph({lat: latitude, lng: longitude}, zoomLevel)
+            // this.foods = [{latitude: 35.26999916271107, longitude: 128.405846911568}]
         }
     },
 

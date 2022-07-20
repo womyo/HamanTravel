@@ -12,6 +12,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.places = require("./model.js")(sequelize, Sequelize);
+db.place = require("./place.model.js")(sequelize, Sequelize);
+db.restaurant = require("./restaurant.model.js")(sequelize, Sequelize);
 
 module.exports = db;
