@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
       keyword: {
         type: Sequelize.STRING
       },
+      image: {
+        allowNull: false,
+        type: Sequelize.STRING
+      }
     },{
         charset: "utf8",
         collate: "utf8_general_ci",
