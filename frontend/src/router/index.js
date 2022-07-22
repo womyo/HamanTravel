@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home'
 import Place from '../views/Place'
-import Haman from '../views/Haman'
+import KeywordTravel from '../views/KeywordTravel'
 import Vue from 'vue'
 
 const routes = [
@@ -16,9 +16,9 @@ const routes = [
       component: Place
     },
     {
-      path: '/haman',
-      name: 'Haman',
-      component: Haman
+      path: '/keyword',
+      name: 'keyword',
+      component: KeywordTravel
     },
 ]
 
