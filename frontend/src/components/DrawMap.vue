@@ -73,7 +73,7 @@ export default {
         ]
 
         return {
-            width: window.innerWidth - 200 + 'px',
+            width: window.innerWidth * 0.8 + 'px',
             height: window.innerHeight -200 + 'px',
             mapOptions,
             initLayers,
@@ -92,7 +92,7 @@ export default {
         },
 
         showKeyword() {
-            this.toast.show({title: '키워드', body: '봄, 여름, 가을, 겨울'});
+            this.toast.show({title: '키워드', body: '봄, 여름, 가을, 겨울, 체험, 유적지, 등산, 문화, 가볼만한곳'});
         }
     },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="haman">
+  <div class="keywordTravel">
     <DrawMap></DrawMap>
   </div>
 </template>
@@ -8,7 +8,7 @@
 import DrawMap from '@/components/DrawMap'
 
 export default {
-  name: 'PlaceView',
+  name: 'KeywordTravel',
   components: {
     DrawMap
   },

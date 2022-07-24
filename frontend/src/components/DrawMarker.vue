@@ -5,7 +5,7 @@
         :longitude=place.longitude
         @onLoad="onLoadMarker($event, 'place', placeIcon, 50)"
         @click="zoomPlace(place.latitude, place.longitude)"
-        @mouseover="isOpen = !isOpen, index = idx, getInfo(places, idx)"
+        @mouseover="isOpen = !isOpen, index = idx, getInfo(places, idx, 'place')"
         @mouseout="isOpen = !isOpen"
     >
     </naver-marker>
@@ -20,7 +20,7 @@
         :latitude=restaurant.latitude
         :longitude=restaurant.longitude
         @onLoad="onLoadMarker($event, 'restaurant', restaurantIcon, 30)"
-        @mouseover="isRestaurantOpen = !isRestaurantOpen, restaurantIndex = idx, getInfo(restaurants, idx)"
+        @mouseover="isRestaurantOpen = !isRestaurantOpen, restaurantIndex = idx, getInfo(restaurants, idx, 'restaurant')"
         @mouseout="isRestaurantOpen = !isRestaurantOpen"
     >
     </naver-marker>
@@ -35,7 +35,7 @@
         :latitude=cafe.latitude
         :longitude=cafe.longitude
         @onLoad="onLoadMarker($event, 'cafe', cafeIcon, 30)"
-        @mouseover="isCafeOpen = !isCafeOpen, cafeIndex = idx, getInfo(cafes, idx)"
+        @mouseover="isCafeOpen = !isCafeOpen, cafeIndex = idx, getInfo(cafes, idx, 'cafe')"
         @mouseout="isCafeOpen = !isCafeOpen"
     >
     </naver-marker>
@@ -101,11 +101,11 @@ export default {
             }
             else if (windowType === 'restaurant') {
                 restaurantInfoWindow.value = infoWindowObject;
-                this.infoWindow = restaurantInfoWindow;
+                this.restaurantInfoWindow = restaurantInfoWindow;
             }
             else if (windowType === 'cafe') {
                 cafeInfoWindow.value = infoWindowObject;
-                this.infoWindow = cafeInfoWindow;
+                this.cafeInfoWindow = cafeInfoWindow;
             }
         };
 
@@ -126,6 +126,8 @@ export default {
             restaurantIndex: null,
             cafeIndex: null,
             infoWindow,
+            restaurantInfoWindow,
+            cafeInfoWindow,
             toast: useToast(),
             placeIcon: "https://i.postimg.cc/jjPRt9J8/sample-removebg-preview.png",
             restaurantIcon: "https://cdn.pixabay.com/photo/2021/05/25/02/03/restaurant-6281067_1280.png",
@@ -157,7 +159,7 @@ export default {
             }
         },
 
-        async getInfo(type, index) {
+        async getInfo(type, index, t) {
             await this.$nextTick(function(){
                 const divParent = document.createElement('div');
                 divParent.className = "box";
@@ -173,22 +175,32 @@ export default {
                 }
                 divParent.appendChild(divTag);
                 
-                this.infoWindow.setContent(divParent);
+                if (t === 'place') {
+                    this.infoWindow.setContent(divParent);
+                }
+                else if (t === 'restaurant') {
+                    this.restaurantInfoWindow.setContent(divParent);
+                }
+                else if (t === 'cafe') {
+                    this.cafeInfoWindow.setContent(divParent);
+                }
             })
         },
 
-        async zoomPlace(latitude, longitude) {
+        zoomPlace(latitude, longitude) {
             const zoomLevel = 15;
             this.map.morph({lat: latitude, lng: longitude}, zoomLevel);
             this.restaurants = [];
-            this.foodMarkers = [];
+            this.restaurantMarkers = [];
+            this.cafes = [];
+            this.cafeMarkers = [];
             const cafeUrl = `/api/restaurant/type/cafe/latitude/${latitude}/longitude/${longitude}`;
             const restaurantUrl = `/api/restaurant/type/restaurant/latitude/${latitude}/longitude/${longitude}`;
-                await axios.get(cafeUrl)
+                axios.get(cafeUrl)
                     .then(res => {
                         this.cafes = res.data;
                     });
-                await axios.get(restaurantUrl)
+                axios.get(restaurantUrl)
                     .then(res => {
                         this.restaurants = res.data;
                     });
