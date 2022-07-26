@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 import axios from 'axios'
 import mitt from 'mitt'
-import { VueGeolocationApi } from 'vue-geolocation-api'
+// import { VueGeolocationApi } from 'vue-geolocation-api'
 
 const app = createApp(App);
 const emitter = mitt();
@@ -20,7 +20,7 @@ app.use(router);
 app.use(BootstrapVue3);
 app.use(BootstrapIconsPlugin);
 app.use(BToastPlugin);
-app.use(VueGeolocationApi);
+// app.use(VueGeolocationApi);
 app.use(naver, {
     clientId: process.env.VUE_APP_CLIENT_ID,
 })

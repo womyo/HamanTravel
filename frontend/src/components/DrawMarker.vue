@@ -16,6 +16,7 @@
     >
     </naver-info-window>
     <naver-marker
+        v-if="map !== undefined && map.getZoom() >= 15"
         v-for="(restaurant,idx) in restaurants"
         :latitude=restaurant.latitude
         :longitude=restaurant.longitude
@@ -31,6 +32,7 @@
     >
     </naver-info-window>
     <naver-marker
+        v-if="map !== undefined && map.getZoom() >= 15"
         v-for="(cafe,idx) in cafes"
         :latitude=cafe.latitude
         :longitude=cafe.longitude
@@ -196,14 +198,14 @@ export default {
             this.cafeMarkers = [];
             const cafeUrl = `/api/restaurant/type/cafe/latitude/${latitude}/longitude/${longitude}`;
             const restaurantUrl = `/api/restaurant/type/restaurant/latitude/${latitude}/longitude/${longitude}`;
-                axios.get(cafeUrl)
-                    .then(res => {
-                        this.cafes = res.data;
-                    });
-                axios.get(restaurantUrl)
-                    .then(res => {
-                        this.restaurants = res.data;
-                    });
+            axios.get(cafeUrl)
+                .then(res => {
+                    this.cafes = res.data;
+                });
+            axios.get(restaurantUrl)
+                .then(res => {
+                    this.restaurants = res.data;
+                });
         },
     },
 
