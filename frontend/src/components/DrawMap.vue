@@ -8,7 +8,7 @@
                 position="position-fixed"
             >
             </b-container>
-            <b-form-input class="inputKeyword" v-model="keyword" placeholder="Keyword" v-on:keydown.enter.prevent="searchKeyword"></b-form-input>
+            <b-form-input class="inputKeyword" v-model="keyword" placeholder="키워드" v-on:keydown.enter.prevent="searchKeyword"></b-form-input>
             <b-button class="searchButton" v-on:click="searchKeyword">Search</b-button>
         </form>
     </div>  
@@ -88,6 +88,7 @@ export default {
     },
     methods: {
         searchKeyword(){
+            this.map.morph({lat: 35.31577217913653, lng: 128.4403580941007}, 12);
             this.$refs.child.searchKeyword();
         },
 

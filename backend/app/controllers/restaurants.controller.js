@@ -25,6 +25,7 @@ exports.findAll = (req, res) => {
           }
           
         });
+
         res.send(dataArray);
       })
       .catch(err => {
