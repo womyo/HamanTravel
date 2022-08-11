@@ -36,14 +36,14 @@ export default {
                 this.textContent = 'Geolocation is not available.';
                 return;
             }
-            this.courseList = []
-            this.textContent = '검색중...'
+            this.courseList = [];
+            this.textContent = '검색중...';
             
             let arr = [{"id":1,"name":"입곡군립공원","latitude":35.2658535740339,"longitude":128.4503113084113,"keyword":"봄,가을,코스","image":"https://www.haman.go.kr/_res/tour/img/sub/web07602_img10.jpg"},{"id":2,"name":"무진정","latitude":35.25545888834795,"longitude":128.42369801056833,"keyword":"봄,여름,코스","image":"https://www.haman.go.kr/_res/tour/img/sub/web07603_img10.jpg"},{"id":4,"name":"악양생태공원","latitude":35.33795176565001,"longitude":128.39803973219836,"keyword":"봄,가을,코스","image":"https://www.haman.go.kr/CmsMultiFile/view.do?multifileId=MF00002641&idx=4129"},{"id":5,"name":"함안 말이산고분군","latitude":35.26999916271107,"longitude":128.405846911568,"keyword":"봄,여름,코스","image":"https://www.haman.go.kr/_res/tour/img/sub/web07600_img10.jpg"},{"id":8,"name":"함안 연꽃테마파크","latitude":35.2804283938982,"longitude":128.39483003518964,"keyword":"여름,코스","image":"https://www.haman.go.kr/_res/tour/img/sub/web07604_img10.jpg"},{"id":9,"name":"강나루생태공원","latitude":35.39244071410651,"longitude":128.5088823965085,"keyword":"봄,코스","image":"https://www.haman.go.kr/_res/tour/img/sub/web07605_img02.png"}]
 
             navigator.geolocation.getCurrentPosition(pos => {
-                this.placeLatitude = pos.coords.latitude;
-                this.placeLongitude = pos.coords.longitude;
+                this.placeLatitude = 35.2538433;
+                this.placeLongitude = 128.6402609;
                 
                 while (arr.length > 0) {
                     let min = Infinity;
@@ -80,6 +80,6 @@ export default {
 .parent {
     font-family: Georgia, "Malgun Gothic", serif;
     font-weight: bolder;
-    text-shadow:-1px 0px FloralWhite , 0px 1px FloralWhite , 1px 0px FloralWhite , 0px -1px FloralWhite ;
+    text-shadow: -1px 0px FloralWhite , 0px 1px FloralWhite , 1px 0px FloralWhite , 0px -1px FloralWhite ;
 }
 </style>

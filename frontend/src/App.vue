@@ -28,5 +28,6 @@ export default {
   height: 100vh;
   background: url(https://cdn.pixabay.com/photo/2018/02/01/06/45/travel-3122702_1280.jpg) no-repeat center;
   background-size: cover;
+  position: relative;
 }
 </style>
