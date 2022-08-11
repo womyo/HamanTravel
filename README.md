@@ -24,7 +24,7 @@
 
 ## 5. 최종 시연 영상
 
-  - 최종 시연 영상 
+  https://youtube.com/shorts/OAk89xAAgKA?feature=share
   
  
   
