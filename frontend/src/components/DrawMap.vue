@@ -66,12 +66,12 @@ export default {
         };
         const mapOptions = {
             zoom: 12,
-            // zoomControl: true,
+            zoomControl: false,
             zoomControlOptions: { 
                 position: 9,
             },
             minZoom: 12,
-            maxBounds: bounds
+            // maxBounds: bounds
         }
         const initLayers = [
         "BACKGROUND",
