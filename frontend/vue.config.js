@@ -6,7 +6,7 @@ module.exports = defineConfig({
   configureWebpack: {
     mode: 'production',
     devtool: 'eval'
-},
+  },
   devServer: {
     proxy : {
         '/api' : {

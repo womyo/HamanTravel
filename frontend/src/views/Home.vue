@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-  </div>
+    </div>
 </template>
 
 <script>
@@ -11,3 +11,11 @@ export default {
   },
 }
 </script>
+
+<style>
+/* .home {
+  height: 89vh;
+  background: url(https://cdn.pixabay.com/photo/2022/06/15/18/29/landscape-7264427_1280.png) no-repeat center;
+  background-size: cover;
+} */
+</style>
