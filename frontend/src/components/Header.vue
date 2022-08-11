@@ -3,8 +3,7 @@
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <div class="container container-fluid">
                 <a class="navbar-brand" href="/">
-                    <img id="logo" src="../assets/travel.png" alt="">
-                    함 안 갈래?
+                    <img id="logo" src="../assets/logo.png" alt="">
                 </a>
                 <div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +37,7 @@ export default {
 
 <style>
 #logo {
-    width: 40px;
+    width: 100px;
     height: 40px;
 }
 </style>

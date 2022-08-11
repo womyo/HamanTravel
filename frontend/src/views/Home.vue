@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    </div>
+    <img class="haman" src="../assets/intro.png"/>
+  </div>
 </template>
 
 <script>
@@ -13,9 +14,12 @@ export default {
 </script>
 
 <style>
-/* .home {
-  height: 89vh;
-  background: url(https://cdn.pixabay.com/photo/2022/06/15/18/29/landscape-7264427_1280.png) no-repeat center;
-  background-size: cover;
-} */
+.haman {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  width: 400px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+}
 </style>
