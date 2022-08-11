@@ -24,7 +24,8 @@ const routes = [
       path: '/course',
       name: 'course',
       component: Course
-    }
+    },
+    
 ]
 
 const router = createRouter({

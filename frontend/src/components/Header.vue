@@ -2,7 +2,10 @@
     <div>
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <div class="container container-fluid">
-                <a class="navbar-brand" href="/">함뚜이따</a>
+                <a class="navbar-brand" href="/">
+                    <img id="logo" src="../assets/travel.png" alt="">
+                    함 안 갈래?
+                </a>
                 <div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -27,7 +30,15 @@
 </template>
 
 <script>
+
 export default {
   name: "Header",
 };
 </script>
+
+<style>
+#logo {
+    width: 40px;
+    height: 40px;
+}
+</style>

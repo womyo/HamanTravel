@@ -3,6 +3,7 @@
         <form class="d-flex">
             <b-icon-info-circle @click="showKeyword"/>
             <b-container
+                class="keywordContainer"
                 :toast="{root: true}"
                 fluid="sm"
                 position="position-fixed"
@@ -21,7 +22,15 @@
                 :initLayers = "initLayers"
                 @onLoad="onLoadMap($event)"
             >   
-            <DrawMarker v-bind:map="map" :keyword="keyword" ref="child"></DrawMarker>
+                <div v-if="!flag" class="countryside">
+                    <b-button class="bt" pill variant="outline-dark" @click="flagChange">지역별</b-button>
+                </div>
+                <div v-else class="btn-group-vertical btn-group-sm" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary" @click="changeCenter(1)">함안/산인</button>
+                    <button type="button" class="btn btn-secondary" @click="changeCenter(2)">군북/법수</button>
+                    <button type="button" class="btn btn-secondary" @click="changeCenter(3)">대산/칠서</button>
+                </div>
+                <DrawMarker v-bind:map="map" :keyword="keyword" ref="child"></DrawMarker>
             </naver-maps>
         </div>
     </div>
@@ -57,9 +66,9 @@ export default {
         };
         const mapOptions = {
             zoom: 12,
-            zoomControl: true,
+            // zoomControl: true,
             zoomControlOptions: { 
-                position: "TOP_RIGHT"
+                position: 9,
             },
             minZoom: 12,
             maxBounds: bounds
@@ -73,12 +82,13 @@ export default {
         ]
 
         return {
-            width: window.innerWidth * 0.8 + 'px',
-            height: window.innerHeight -200 + 'px',
+            width: window.innerWidth + 'px',
+            height: window.innerHeight - 120 + 'px',
             mapOptions,
             initLayers,
             keyword: '',
             map,
+            flag: false,
             toast: useToast(),
             onLoadMap,
         }
@@ -94,6 +104,24 @@ export default {
 
         showKeyword() {
             this.toast.show({title: '키워드', body: '봄, 여름, 가을, 겨울, 체험, 유적지, 등산, 문화, 가볼만한곳'});
+        },
+
+        flagChange() {
+            this.flag = !this.flag;
+        },
+
+        changeCenter(id) {
+            if (id === 1) {
+                this.map.morph({lat: 35.25545888834795, lng: 128.42369801056833}, 12);
+            }
+            else if (id === 2) {
+                this.map.morph({lat: 35.30030480797324, lng: 128.30109950813097}, 12);
+            }
+            else if (id === 3) {
+                this.map.morph({lat: 35.36386282268127, lng: 128.47801374929467}, 12);
+                this.flag = !this.flag;
+            }
+            this.$refs.child.searchKeyword();
         }
     },
 
@@ -131,5 +159,18 @@ export default {
   text-align: center;
   font-weight: 600;
   padding: 6px 8px;
+}
+.keywordContainer {
+    width: 10px;
+}
+.countryside {
+    position: absolute;
+    float: left;
+    z-index: 1;
+}
+.btn-group-vertical {
+    position: absolute;
+    float: left;
+    z-index: 1;
 }
 </style>

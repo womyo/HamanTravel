@@ -20,7 +20,7 @@ exports.findAll = (req, res) => {
           lonDiff = targetLongitude - longitude;
           distance = latDiff ** 2 + lonDiff ** 2
 
-          if (distance <= 0.0005) {
+          if (distance <= 0.0002) {
             dataArray.push(element);
           }
           
