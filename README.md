@@ -18,9 +18,29 @@ Haman is a city with many hidden travel spots but it's not well know to people. 
    
   
 ## 3. 팀 소개
+
+### 팀원
+
+
+- 이인호
+
+ 
+ ```
+ * 역할: Full stack Engineer
+ * E-mail: inhoking01@naver.com
+ ```
+ 
+- 정유정
+
+ 
+ ```
+ * 역할: Product Manager
+ * E-mail: godream86@naver.com
+ ```
+ 
  
 ## 4. 사용법
-
+  추후 추가 예정
   
 
 ## 5. 최종 시연 영상
