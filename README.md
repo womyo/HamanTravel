@@ -34,7 +34,7 @@ Haman is a city with many hidden travel spots but it's not well know to people. 
 
  
  ```
- * 역할: Product Manager
+ * 역할: Project Manager
  * E-mail: godream86@naver.com
  ```
  
