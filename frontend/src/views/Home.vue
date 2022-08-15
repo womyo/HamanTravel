@@ -14,19 +14,19 @@ export default {
 </script>
 
 <style>
-/* .haman {
+.haman {
   position: absolute;
   top: 25%;
   left: 20%;
   width: 400px;
   height: 100px;
   margin: -50px 0 0 -50px;
-} */
-.haman {
+}
+/* .haman {
   position: absolute;
-  top: 15%;
+  top: 25%;
   left: 25%;
   width: 50%;
   height: 20%;
-}
+} */
 </style>

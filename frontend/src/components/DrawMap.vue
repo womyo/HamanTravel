@@ -83,7 +83,7 @@ export default {
 
         return {
             width: window.innerWidth + 'px',
-            height: window.innerHeight - 120 + 'px',
+            height: window.innerHeight - 110 + 'px',
             mapOptions,
             initLayers,
             keyword: '',
