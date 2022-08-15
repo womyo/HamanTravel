@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
   let condition = keyword ? { keyword: { [Op.like]: "%" + keyword + "%" } } : null;
 
   Place.findAll({ where: condition })
-    .then(data => {
+    .then(async data => {
       res.send(data);
     })
     .catch(err => {

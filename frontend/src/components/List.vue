@@ -3,29 +3,29 @@
 		<h2>함 말해봐!</h2>
 
 		<div class="searchWrap">
-			<input type="text" v-model="keyword" @keyup.enter="fnSearch" /><button @click="fnSearch" class="btn btn-secondary">검색</button>
+			<b-form-select size="sm" style="width: 20%; height: 36px" class="selectBox" v-model="code" ref="code" :options="options" @change="getListByPage"></b-form-select>
+			<input type="text" v-model="title" @keyup.enter="getListByPage" /><button @click="getListByPage" class="btn btn-secondary">검색</button>
 		</div>
-        
         <div class="wrap">
             <div class="listWrap">
                 <table class="tbList">
-                    <colgroup>
+                    <!-- <colgroup>
                         <col width="6%" />
                         <col width="*" />
                         <col width="10%" />
                         <col width="15%" />
-                    </colgroup>
+                    </colgroup> -->
                     <tr>
-                        <th>no</th>
+                        <!-- <th>no</th> -->
                         <th>제목</th>
                         <th>아이디</th>
                         <th>날짜</th>
                     </tr>
                     <tr v-for="(row, idx) in list" :key="idx">
-                        <td>{{no-idx}}</td>
+                        <td>{{(idx+1) + (currentPage-1)*10}}</td>
+                        <!-- <td>{{(rows/2-10*(currentPage-1))-idx}}</td> -->
                         <td class="txt_left"><a href="javascript:;">{{row.title}}</a></td>
                         <td>{{row.userId}}</td>
-                        <!-- <td>{{row.regdate.substring(0,10)}}</td> -->
                     </tr>
                     <tr v-if="list.length == 0">
                         <td colspan="4">데이터가 없습니다.</td>
@@ -33,20 +33,7 @@
                 </table>
             </div>
 
-            <div class="pagination" v-if="paging.totalCount > 0">
-                <a href="javascript:;" @click="fnPage(1)" class="first">&lt;&lt;</a>
-                <a href="javascript:;" v-if="paging.start_page > 10" @click="fnPage(`${paging.start_page-1}`)"  class="prev">&lt;</a>
-                <template v-for=" (n,index) in paginavigation()">
-                    <template v-if="paging.page==n">
-                        <strong :key="index">{{n}}</strong>
-                    </template>
-                    <template v-else>
-                        <a href="javascript:;" @click="fnPage(`${n}`)" :key="index">{{n}}</a>
-                    </template>
-                </template>
-                <a href="javascript:;" v-if="paging.total_page > paging.end_page" @click="fnPage(`${paging.end_page+1}`)"  class="next">&gt;</a>
-                <a href="javascript:;" @click="fnPage(`${paging.total_page}`)" class="last">&gt;&gt;</a>
-            </div>
+            <b-pagination v-model="currentPage" :total-rows="rows" align="center" @page-click="showList" size="sm"></b-pagination>
 
             <div class="btnRightWrap">
                 <button @click="fnAdd" class="btn btn-primary">등록</button>
@@ -61,70 +48,71 @@ import axios from 'axios';
 export default {
 	data() { 
 		return{
-			body:'' 
-			,board_code:'news' 
-			,list:'' 
-			,no:'' 
-			,paging:'' 
-			,start_page:'' 
-			,page:this.$route.query.page ? this.$route.query.page:1
-			,keyword:this.$route.query.keyword
-			,paginavigation:function() { 
-				var pageNumber = [];
-				var start_page = this.paging.start_page;
-				var end_page = this.paging.end_page;
-				for (var i = start_page; i <= end_page; i++) pageNumber.push(i);
-				return pageNumber;
-			}
+			currentPage: 1,
+			rows: null,
+			board_code:'',
+			list:'',
+			title:this.$route.query.title,
+			code: null,
+			url: '',
+			options: [
+			{ value: "null", text: "말머리", disabled: true},
+			{ value: "질문", text: "질문" },
+			{ value: "공지", text: "공지" },
+			{ value: "잡담", text: "잡담" },
+			]
 		}
 	}
 	,mounted() { 
-		this.fnGetList();
-	}
-	, methods:{
-		fnGetList() { 
+		this.getAllRows();
+		this.getListByPage(this.currentPage);
+	},
+	methods:{
+		showList(button, page){
+			this.currentPage = page;
+			this.getListByPage(page);
+		},
+		getListByPage(page) {
+                this.loading = true;
+				
+				this.$nextTick(()=>{
+					let c = this.code ? `code=${this.code}&` : null;
+					console.log(c)
+					let t = this.title ? `title=${this.title}` : null;
+					this.url = `/api/board?` + c + t + `&page=${page}`;
+					// if (this.code) {
+					// 	this.url = `/api/board?${null}&page=${page}`;
+					// }
+					// else {
+					// 	this.url = `/api/board?page=${page}`;
+					// }
+					axios.get(this.url)
+						.then(res => {
+							this.list = res.data;
+						})
+						.catch(error => {
+							console.log(error);
+						})
+						.finally(() => this.loading = false);
+				})
+		},
+		async getAllRows() { 
 			this.body = { 
 				board_code:this.board_code
 				,keyword:this.keyword
 				,page:this.page
 			}
             const url = `/api/board`;
-			axios.get(url)
+			await axios.get(url)
 			.then((res)=>{
-                this.list = res.data
-				// if(res.data.success) {
-				// 	this.list = res.data.list;
-				// 	this.paging = res.data.paging;
-				// 	this.no = this.paging.totalCount - ((this.paging.page-1) * this.paging.ipp);
-				// } else {
-				// 	alert("실행중 실패했습니다.\n다시 이용해 주세요.");
-				// }
+				this.rows = res.data.length*2;
 			})
 			.catch((err)=>{
 				console.log(err);
 			})
-		}
-		,fnAdd() {
+		},
+		fnAdd() {
 			this.$router.push("./write");
-		}
-		,getList() {
-			this.$axios.get("http://localhost:3000/api/board")
-			.then((res)=>{
-				console.log(res);
-			})
-			.then((err)=>{
-				console.log(err);
-			})
-		}
-		,fnSearch() { 
-			this.paging.page = 1;
-			this.fnGetList();
-		}
-		, fnPage(n) {
-			if(this.page != n) {
-				this.page = n;
-				this.fnGetList();
-			}
 		}
 	}
 }
@@ -134,16 +122,11 @@ export default {
     .wrap {
         background-color: rgba(255,255,255,0.5);
     }
-	.searchWrap{border:1px solid #888; border-radius:5px; text-align:center; padding:20px 0; margin-bottom:40px;}
+	.searchWrap{display: flex; justify-content: center; border:1px solid #888; border-radius:5px; text-align:center; padding:10px 0; margin-bottom:40px;}
 	.searchWrap input{width:60%; height:36px; border-radius:3px; padding:0 10px; border:1px solid #888;}
 	.searchWrap .btnSearch{display:inline-block; margin-left:10px;}
 	/* .tbList th{border-top:1px solid #888;} */
 	.tbList th, .tbList td{border-bottom:1px solid #eee; padding:5px 0;}
 	.tbList td.txt_left{text-align:left;}
 	.btnRightWrap{text-align:right; margin:10px 0 0 0;}
-
-	.pagination{margin:20px 0 0 0; text-align:center;}
-	.first, .prev, .next, .last{border:1px solid #666; margin:0 5px;}
-	.pagination span{display:inline-block; padding:0 5px; color:#333;}
-	.pagination a{text-decoration:none; display:inline-blcok; padding:0 5px; color:#666;}
 </style>

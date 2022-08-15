@@ -8,12 +8,15 @@
 						<col width="*" />
 					</colgroup>
 					<tr>
-						<th>제목</th>
-						<td><input type="text" v-model="subject" ref="subject" /></td>
+						<th>
+							<b-form-select size="sm" v-model="code" ref="code" :options="options">
+							</b-form-select>
+						</th>
+						<td><input type="text" v-model="title" placeholder="제목을 입력해주세요" ref="title" /></td>
 					</tr>
 					<tr>
-						<th>내용</th>
-						<td><textarea v-model="cont" ref="cont"></textarea></td>
+						<th></th>
+						<td><textarea v-model="contents" ref="contents"></textarea></td>
 					</tr>
 				</table>
 			</form>
@@ -27,14 +30,22 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
 	data() { 
 		return{
-			board_code:'news'
-			,subject:''
-			,cont:''
-			,id:'admin'
-			,form:''
+			code:null,
+			title:'',
+			contents:'',
+			userId:'admin',
+			form:'',
+			options: [
+			{ value: "null", text: "말머리", disabled: true},
+			{ value: "질문", text: "질문" },
+			{ value: "공지", text: "공지" },
+			{ value: "잡담", text: "잡담" },
+			]
 		}
 	}
 	,methods:{
@@ -43,20 +54,25 @@ export default {
 			
 		}
 		,fnAddProc() { 
-			if(!this.subject) { 
+			if(!this.code) { 
+				alert("말머리를 선택해 주세요");
+				return;
+			}
+
+			if(!this.title) { 
 				alert("제목을 입력해 주세요");
-				this.$refs.subject.focus(); 
+				this.$refs.title.focus(); 
 				return;
 			}
 
 			this.form = { 
-				board_code:this.board_code
-				,subject:this.subject
-				,cont:this.cont
-				,id:this.id
+				code: this.code,
+				userId: this.userId,
+				title: this.title,
+				contents: this.contents,
 			} 
 			
-			this.$axios.post('http://localhost:3000/api/board',this.form)
+			axios.post('http://localhost:3000/api/board', this.form)
 			.then((res)=>{
 				if(res.data.success) {
 					alert('등록되었습니다.');
