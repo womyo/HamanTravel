@@ -12,7 +12,7 @@ exports.findAll = (req, res) => {
     let dataArray = []
 
     Restaurant.findAll({where: condition})
-      .then(data => {
+      .then(async data => {
         data.forEach(element => {
           latitude = element.dataValues.latitude;
           longitude = element.dataValues.longitude;
