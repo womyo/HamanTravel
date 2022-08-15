@@ -18,6 +18,8 @@ require("./app/routes/places.route")(app);
 
 require("./app/routes/restaurants.route")(app);
 
+require("./app/routes/boards.route")(app);
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

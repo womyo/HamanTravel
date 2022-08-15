@@ -19,7 +19,10 @@
                             <a class="nav-link active" href="/keyword">키워드 여행</a>
                         </li>
                         <li class="nav-item float-end ms-md-auto">
-                            <a class="nav-link active" href="/course">추천 코스</a>
+                            <a class="nav-link active" href="/course">코스 추천</a>
+                        </li>
+                        <li class="nav-item float-end ms-md-auto">
+                            <a class="nav-link active" href="/community/list">함 말해봐</a>
                         </li>
                     </ul>
                 </div>

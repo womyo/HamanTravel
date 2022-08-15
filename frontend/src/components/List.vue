@@ -1,0 +1,149 @@
+<template>
+	<div>
+		<h2>함 말해봐!</h2>
+
+		<div class="searchWrap">
+			<input type="text" v-model="keyword" @keyup.enter="fnSearch" /><button @click="fnSearch" class="btn btn-secondary">검색</button>
+		</div>
+        
+        <div class="wrap">
+            <div class="listWrap">
+                <table class="tbList">
+                    <colgroup>
+                        <col width="6%" />
+                        <col width="*" />
+                        <col width="10%" />
+                        <col width="15%" />
+                    </colgroup>
+                    <tr>
+                        <th>no</th>
+                        <th>제목</th>
+                        <th>아이디</th>
+                        <th>날짜</th>
+                    </tr>
+                    <tr v-for="(row, idx) in list" :key="idx">
+                        <td>{{no-idx}}</td>
+                        <td class="txt_left"><a href="javascript:;">{{row.title}}</a></td>
+                        <td>{{row.userId}}</td>
+                        <!-- <td>{{row.regdate.substring(0,10)}}</td> -->
+                    </tr>
+                    <tr v-if="list.length == 0">
+                        <td colspan="4">데이터가 없습니다.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="pagination" v-if="paging.totalCount > 0">
+                <a href="javascript:;" @click="fnPage(1)" class="first">&lt;&lt;</a>
+                <a href="javascript:;" v-if="paging.start_page > 10" @click="fnPage(`${paging.start_page-1}`)"  class="prev">&lt;</a>
+                <template v-for=" (n,index) in paginavigation()">
+                    <template v-if="paging.page==n">
+                        <strong :key="index">{{n}}</strong>
+                    </template>
+                    <template v-else>
+                        <a href="javascript:;" @click="fnPage(`${n}`)" :key="index">{{n}}</a>
+                    </template>
+                </template>
+                <a href="javascript:;" v-if="paging.total_page > paging.end_page" @click="fnPage(`${paging.end_page+1}`)"  class="next">&gt;</a>
+                <a href="javascript:;" @click="fnPage(`${paging.total_page}`)" class="last">&gt;&gt;</a>
+            </div>
+
+            <div class="btnRightWrap">
+                <button @click="fnAdd" class="btn btn-primary">등록</button>
+            </div>
+        </div>
+	</div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+	data() { 
+		return{
+			body:'' 
+			,board_code:'news' 
+			,list:'' 
+			,no:'' 
+			,paging:'' 
+			,start_page:'' 
+			,page:this.$route.query.page ? this.$route.query.page:1
+			,keyword:this.$route.query.keyword
+			,paginavigation:function() { 
+				var pageNumber = [];
+				var start_page = this.paging.start_page;
+				var end_page = this.paging.end_page;
+				for (var i = start_page; i <= end_page; i++) pageNumber.push(i);
+				return pageNumber;
+			}
+		}
+	}
+	,mounted() { 
+		this.fnGetList();
+	}
+	, methods:{
+		fnGetList() { 
+			this.body = { 
+				board_code:this.board_code
+				,keyword:this.keyword
+				,page:this.page
+			}
+            const url = `/api/board`;
+			axios.get(url)
+			.then((res)=>{
+                this.list = res.data
+				// if(res.data.success) {
+				// 	this.list = res.data.list;
+				// 	this.paging = res.data.paging;
+				// 	this.no = this.paging.totalCount - ((this.paging.page-1) * this.paging.ipp);
+				// } else {
+				// 	alert("실행중 실패했습니다.\n다시 이용해 주세요.");
+				// }
+			})
+			.catch((err)=>{
+				console.log(err);
+			})
+		}
+		,fnAdd() {
+			this.$router.push("./write");
+		}
+		,getList() {
+			this.$axios.get("http://localhost:3000/api/board")
+			.then((res)=>{
+				console.log(res);
+			})
+			.then((err)=>{
+				console.log(err);
+			})
+		}
+		,fnSearch() { 
+			this.paging.page = 1;
+			this.fnGetList();
+		}
+		, fnPage(n) {
+			if(this.page != n) {
+				this.page = n;
+				this.fnGetList();
+			}
+		}
+	}
+}
+</script>
+
+<style>
+    .wrap {
+        background-color: rgba(255,255,255,0.5);
+    }
+	.searchWrap{border:1px solid #888; border-radius:5px; text-align:center; padding:20px 0; margin-bottom:40px;}
+	.searchWrap input{width:60%; height:36px; border-radius:3px; padding:0 10px; border:1px solid #888;}
+	.searchWrap .btnSearch{display:inline-block; margin-left:10px;}
+	/* .tbList th{border-top:1px solid #888;} */
+	.tbList th, .tbList td{border-bottom:1px solid #eee; padding:5px 0;}
+	.tbList td.txt_left{text-align:left;}
+	.btnRightWrap{text-align:right; margin:10px 0 0 0;}
+
+	.pagination{margin:20px 0 0 0; text-align:center;}
+	.first, .prev, .next, .last{border:1px solid #666; margin:0 5px;}
+	.pagination span{display:inline-block; padding:0 5px; color:#333;}
+	.pagination a{text-decoration:none; display:inline-blcok; padding:0 5px; color:#666;}
+</style>

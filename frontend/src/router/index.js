@@ -3,6 +3,8 @@ import Home from '../views/Home'
 import Place from '../views/Place'
 import KeywordTravel from '../views/KeywordTravel'
 import Course from '../views/Course'
+import Community from '../views/Community'
+import Write from '../components/Write'
 
 const routes = [
     {
@@ -25,7 +27,16 @@ const routes = [
       name: 'course',
       component: Course
     },
-    
+    {
+      path: '/community/list',
+      name: 'community',
+      component: Community
+    },
+		,{
+			path: '/community/write'
+			,name: Write
+			,component: Write
+		}
 ]
 
 const router = createRouter({
