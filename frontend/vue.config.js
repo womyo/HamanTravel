@@ -14,10 +14,10 @@ module.exports = defineConfig({
     proxy : {
         '/api' : {
             target: 'http://15.164.165.238:3000',
-              changeOrigin: true,
-              pathRewrite : {
-                '^/api' : ''
-              }
+            changeOrigin: true,
+            pathRewrite : {
+              '^/api' : ''
+            }
          }
       }
     }
