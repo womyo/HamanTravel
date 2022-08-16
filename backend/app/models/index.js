@@ -5,6 +5,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
   operatorsAliases: false,
+  timezone: dbConfig.timezone,
+  dialectOptions: {
+    dateStrings:true,
+    typeCast:true
+  }
 });
 
 const db = {};

@@ -29,7 +29,7 @@ module.exports = (sequelize, Sequelize) => {
     },{
         charset: "utf8",
         collate: "utf8_general_ci",
-        timestamps: false
+        timestamps: true
     });
 
     return boards;

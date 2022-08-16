@@ -56,7 +56,6 @@ exports.findAll = (req, res) => {
   else {
     whereCondition = null;
   }
-  console.log(whereCondition)
   let condition = !pageNum ? undefined : {where: whereCondition, offset: offset, limit: limit, order: [['id', 'DESC']]}
 
   Board.findAll(condition)
@@ -66,7 +65,63 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred."
+      });
+    });
+};
+
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Board.findOne({ where: { id: id } })
+    .then(async data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred."
+      });
+    });
+}
+
+exports.update = (req, res) => {
+  if (!req.body.id) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  const boardPost = {
+    id: req.body.id,
+    code: req.body.code,
+    userId: req.body.userId,
+    title: req.body.title,
+    contents: req.body.contents
+  };
+
+  Board.update(boardPost, {where: {id: req.body.id}})
+    .then(data => {
+      res.send({success:true});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating."
+      });
+    });
+};
+
+exports.destroy = async (req, res) => {
+  await Board.destroy({where: {id: req.query.id}})
+    .then(result => {
+      res.send({success:true, result:result});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating."
       });
     });
 };

@@ -3,14 +3,20 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 const port = 3000
+let path = require('path')
+let history = require('connect-history-api-fallback');
+
 let corsOptions = {
-    origin: "http://localhost:8080"
+    origin: "http://localhost:3000"
 }
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-const db = require("./app/models");
 
+app.use(history());
+app.use(express.static(path.join(__dirname, "public")));
+
+const db = require("./app/models");
 
 db.sequelize.sync({force: false})
 

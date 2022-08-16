@@ -5,6 +5,7 @@ import KeywordTravel from '../views/KeywordTravel'
 import Course from '../views/Course'
 import Community from '../views/Community'
 import Write from '../components/Write'
+import View from '../components/View'
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
 			path: '/community/write'
 			,name: Write
 			,component: Write
+		}
+    ,{
+			path: '/community/view'
+			,name: View
+			,component: View
 		}
 ]
 
