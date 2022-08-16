@@ -58,7 +58,7 @@ export default {
 	},
 	methods:{
 		fnGetView() {
-			axios.get('http://localhost:3000/api/board/'+this.body.id)
+			axios.get('/api/board/'+this.body.id)
 			.then((res)=>{
 				this.code = res.data.code;
 				this.title = res.data.title;
@@ -95,7 +95,7 @@ export default {
 				contents: this.contents,
 			} 
 			
-			axios.post('http://localhost:3000/api/board', this.form)
+			axios.post('/api/board', this.form)
 			.then((res)=>{
 				if(res.data.success) {
 					alert('등록되었습니다.');
@@ -128,7 +128,7 @@ export default {
 				contents: this.contents,
 			} 
 			
-			axios.put('http://localhost:3000/api/board',this.form)
+			axios.put('/api/board',this.form)
 			.then((res)=>{
 				if(res.data.success) {
 					alert('수정되었습니다.');

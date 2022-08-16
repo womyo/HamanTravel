@@ -45,7 +45,7 @@ export default {
 	}
 	,methods:{
 		fnGetView() {
-			axios.get('http://localhost:3000/api/board/'+this.body.id)
+			axios.get('/api/board/'+this.body.id)
 			.then((res)=>{
 				this.title = res.data.title;
 				this.contents = res.data.contents.replace(/(\n)/g,'<br/>');
@@ -65,7 +65,7 @@ export default {
 		},
         fnDeleteProc() {
 			if(confirm("삭제하시겠습니까?")) {
-				axios.delete('http://localhost:3000/api/board', {params:this.body})
+				axios.delete('/api/board', {params:this.body})
 				.then((res)=>{
 					if(res.data.result) {
 						alert("삭제되었습니다.");
