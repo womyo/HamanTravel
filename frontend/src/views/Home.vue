@@ -16,17 +16,10 @@ export default {
 <style>
 .haman {
   position: absolute;
-  top: 25%;
-  left: 20%;
-  width: 400px;
-  height: 100px;
-  margin: -50px 0 0 -50px;
-}
-/* .haman {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
+  top: 17%;
+  left: 15%;
+  width: 70%;
   height: 20%;
-} */
+  z-index: 0;
+}
 </style>

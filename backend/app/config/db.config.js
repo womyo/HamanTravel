@@ -7,10 +7,11 @@ module.exports = {
     DB: process.env.DB_NAME,
     PORT: process.env.DB_PORT,
     dialect: "mysql",
+    timezone: "+09:00",
     pool: {
         max: 5,
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
 }

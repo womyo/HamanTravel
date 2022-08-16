@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="header">
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <div class="container container-fluid">
                 <a class="navbar-brand" href="/">
@@ -39,6 +39,10 @@ export default {
 </script>
 
 <style>
+#header {
+    z-index: 1;
+    position: relative;
+}
 #logo {
     width: 100px;
     height: 40px;

@@ -25,7 +25,7 @@
                 <div v-if="!flag" class="countryside">
                     <b-button class="bt" pill variant="outline-dark" @click="flagChange">지역별</b-button>
                 </div>
-                <div v-else class="btn-group-vertical btn-group-sm" role="group" aria-label="Basic example">
+                <div v-else id="btnGroup" class="btn-group-vertical btn-group-sm" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-secondary" @click="changeCenter(1)">함안/산인</button>
                     <button type="button" class="btn btn-secondary" @click="changeCenter(2)">군북/법수</button>
                     <button type="button" class="btn btn-secondary" @click="changeCenter(3)">대산/칠서</button>
@@ -119,8 +119,8 @@ export default {
             }
             else if (id === 3) {
                 this.map.morph({lat: 35.36386282268127, lng: 128.47801374929467}, 12);
-                this.flag = !this.flag;
             }
+            this.flag = !this.flag;
             this.$refs.child.searchKeyword();
         }
     },
@@ -162,6 +162,7 @@ export default {
 }
 .keywordContainer {
     width: 10px;
+    z-index: 2;
 }
 .countryside {
     position: absolute;
@@ -169,7 +170,6 @@ export default {
     z-index: 1;
 }
 .btn-group-vertical {
-    position: absolute;
     float: left;
     z-index: 1;
 }

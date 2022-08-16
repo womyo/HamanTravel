@@ -7,5 +7,11 @@ module.exports = app => {
 
     router.get("/", boards.findAll);
     
+    router.get("/:id", boards.findOne);
+
+    router.put("/", boards.update);
+
+    router.delete("/", boards.destroy);
+
     app.use("/api/board", router);
 }
