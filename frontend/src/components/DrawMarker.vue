@@ -4,9 +4,7 @@
         :latitude=place.latitude
         :longitude=place.longitude
         @onLoad="onLoadMarker($event, 'place', placeIcon, 50)"
-        @click="zoomPlace(place.latitude, place.longitude)"
-        @mouseover="isOpen = !isOpen, index = idx, getInfo(places, idx, 'place')"
-        @mouseout="isOpen = !isOpen"
+        @click="isOpen = !isOpen, index = idx, getInfo(places, idx, 'place'), zoomPlace(place.latitude, place.longitude)"
     >
     </naver-marker>
     <naver-info-window
@@ -21,8 +19,7 @@
         :latitude=restaurant.latitude
         :longitude=restaurant.longitude
         @onLoad="onLoadMarker($event, 'restaurant', restaurantIcon, 30)"
-        @mouseover="isRestaurantOpen = !isRestaurantOpen, restaurantIndex = idx, getInfo(restaurants, idx, 'restaurant')"
-        @mouseout="isRestaurantOpen = !isRestaurantOpen"
+        @click="isRestaurantOpen = !isRestaurantOpen, restaurantIndex = idx, getInfo(restaurants, idx, 'restaurant')"
     >
     </naver-marker>
     <naver-info-window
@@ -37,8 +34,7 @@
         :latitude=cafe.latitude
         :longitude=cafe.longitude
         @onLoad="onLoadMarker($event, 'cafe', cafeIcon, 30)"
-        @mouseover="isCafeOpen = !isCafeOpen, cafeIndex = idx, getInfo(cafes, idx, 'cafe')"
-        @mouseout="isCafeOpen = !isCafeOpen"
+        @click="isCafeOpen = !isCafeOpen, cafeIndex = idx, getInfo(cafes, idx, 'cafe')"
     >
     </naver-marker>
     <naver-info-window
