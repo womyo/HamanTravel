@@ -13,7 +13,7 @@ import mitt from 'mitt'
 const app = createApp(App);
 const emitter = mitt();
 
-axios.defaults.baseURL = 'http://15.164.165.238'
+axios.defaults.baseURL = 'ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com'
 
 app.use(router);
 app.use(BootstrapVue3);
