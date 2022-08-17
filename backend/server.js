@@ -7,7 +7,7 @@ let path = require('path')
 let history = require('connect-history-api-fallback');
 
 let corsOptions = {
-    origin: "http://15.164.165.238:3000"
+    origin: "http://15.164.165.238"
 }
 app.use(cors(corsOptions))
 app.use(bodyParser.json())

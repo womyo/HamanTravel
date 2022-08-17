@@ -13,7 +13,7 @@ import mitt from 'mitt'
 const app = createApp(App);
 const emitter = mitt();
 
-axios.defaults.baseURL = 'http://15.164.165.238:3000'
+axios.defaults.baseURL = 'http://15.164.165.238'
 
 app.use(router);
 app.use(BootstrapVue3);
