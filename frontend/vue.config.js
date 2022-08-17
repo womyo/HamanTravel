@@ -13,7 +13,7 @@ module.exports = defineConfig({
   devServer: {
     proxy : {
         '/api' : {
-            target: 'ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com',
+            target: 'http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com',
             changeOrigin: true,
             pathRewrite : {
               '^/api' : ''
