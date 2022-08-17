@@ -11,43 +11,70 @@ const routes = [
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        title: "함 안 갈래?",
+      },
     },
     {
       path: '/place',
       name: 'Place',
-      component: Place
+      component: Place,
+      meta: {
+        title: "모범음식점",
+      },
     },
     {
       path: '/keyword',
       name: 'keyword',
-      component: KeywordTravel
+      component: KeywordTravel,
+      meta: {
+        title: "키워드 관광",
+      },
     },
     {
       path: '/course',
       name: 'course',
-      component: Course
+      component: Course,
+      meta: {
+        title: "코스 추천",
+      },
     },
     {
       path: '/community/list',
       name: 'community',
-      component: Community
+      component: Community,
+      meta: {
+        title: "함 말해봐!",
+      },
     },
-		,{
-			path: '/community/write'
-			,name: Write
-			,component: Write
-		}
-    ,{
-			path: '/community/view'
-			,name: View
-			,component: View
+    {
+			path: '/community/write',
+			name: Write,
+			component: Write,
+      meta: {
+        title: "함 말해봐!-작성",
+      },
+		},
+    {
+			path: '/community/view',
+			name: View,
+			component: View,
+      meta: {
+        title: "함 말해봐!-상세보기",
+      },
 		}
 ]
 
 const router = createRouter({
     history: createWebHistory(),
     routes
-  })
+})
+
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  next();
+});
 
 export default router

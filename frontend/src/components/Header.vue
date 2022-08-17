@@ -16,7 +16,7 @@
                             <a class="nav-link active" href="/">홈</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/keyword">키워드 여행</a>
+                            <a class="nav-link active" href="/keyword">키워드 관광</a>
                         </li>
                         <li class="nav-item float-end ms-md-auto">
                             <a class="nav-link active" href="/course">코스 추천</a>
