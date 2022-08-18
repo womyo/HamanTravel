@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home'
 import Place from '../views/Place'
-import KeywordTravel from '../views/KeywordTravel'
+import KeywordTour from '../views/KeywordTour'
 import Course from '../views/Course'
 import Community from '../views/Community'
 import Write from '../components/Write'
@@ -27,7 +27,7 @@ const routes = [
     {
       path: '/keyword',
       name: 'keyword',
-      component: KeywordTravel,
+      component: KeywordTour,
       meta: {
         title: "키워드 관광",
       },

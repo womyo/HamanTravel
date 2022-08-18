@@ -1,5 +1,5 @@
 <template>
-  <div class="keywordTravel">
+  <div class="keywordTour">
     <DrawMap></DrawMap>
     <Footer></Footer>
   </div>
@@ -10,7 +10,7 @@ import DrawMap from '@/components/DrawMap'
 import Footer from '@/components/Footer.vue';
 
 export default {
-  name: 'KeywordTravel',
+  name: 'KeywordTour',
   components: {
     DrawMap,
     Footer
