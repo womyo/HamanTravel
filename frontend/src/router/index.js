@@ -6,6 +6,9 @@ import Course from '../views/Course'
 import Community from '../views/Community'
 import Write from '../components/Write'
 import View from '../components/View'
+import Login from '../views/Login'
+import Register from '../views/Register'
+const Profile = () => import("../views/Profile")
 
 const routes = [
     {
@@ -63,7 +66,32 @@ const routes = [
       meta: {
         title: "함 말해봐!-상세보기",
       },
-		}
+		},
+    {
+			path: '/login',
+			name: Login,
+			component: Login,
+      meta: {
+        title: "로그인",
+      },
+		},
+    {
+			path: '/register',
+			name: Register,
+			component: Register,
+      meta: {
+        title: "회원가입",
+      },
+		},
+    {
+      path: "/profile",
+      name: Profile,
+      // lazy-loaded
+      component: Profile,
+      meta: {
+        title: "프로필"
+      }
+    },
 ]
 
 const router = createRouter({
