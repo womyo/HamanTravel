@@ -1,30 +1,52 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const app = express()
-const port = 3000
-let path = require('path')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express();
+const port = 3000;
+let path = require('path');
 let history = require('connect-history-api-fallback');
+const db = require("./app/models");
+const Role = db.role;
 
 let corsOptions = {
     origin: "http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com"
+    // origin: "http://localhost:3000"
 }
-app.use(cors(corsOptions))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(history());
 app.use(express.static(path.join(__dirname, "public")));
 
-const db = require("./app/models");
+db.sequelize.sync({force: false});
 
-db.sequelize.sync({force: false})
+// function initial() {
+//     Role.create({
+//         id: 1,
+//         name: "user"
+//     });
+
+//     Role.create({
+//         id: 2,
+//         name: "moderator"
+//     });
+
+//     Role.create({
+//         id: 3,
+//         name: "admin"
+//     });
+// }
 
 require("./app/routes/places.route")(app);
 
 require("./app/routes/restaurants.route")(app);
 
 require("./app/routes/boards.route")(app);
+
+require('./app/routes/auth.route')(app);
+
+require('./app/routes/user.route')(app);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

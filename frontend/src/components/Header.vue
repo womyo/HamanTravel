@@ -16,14 +16,30 @@
                             <a class="nav-link active" href="/">홈</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/keyword">키워드 관광</a>
+                            <router-link class="nav-link active" to="/keyword">키워드 관광</router-link>
                         </li>
                         <li class="nav-item float-end ms-md-auto">
-                            <a class="nav-link active" href="/course">코스 추천</a>
+                            <router-link class="nav-link active" to="/course">코스 추천</router-link>
                         </li>
                         <li class="nav-item float-end ms-md-auto">
-                            <a class="nav-link active" href="/community/list">함 말해봐</a>
+                            <router-link class="nav-link active" to="/community/list">함 말해봐</router-link>
                         </li>
+                        <div v-if="!currentUser" class="navbar-nav ml-auto">
+                            <li class="nav-item float-end ms-md-auto">
+                                <router-link class="nav-link active" to="/register">가입</router-link>
+                            </li>
+                            <li class="nav-item float-end ms-md-auto">
+                                <router-link class="nav-link active" to="/login">로그인</router-link>
+                            </li>
+                        </div>
+                        <div v-if="currentUser" class="navbar-nav ml-auto">
+                            <li class="nav-item float-end ms-md-auto">
+                                <router-link class="nav-link active" to="/profile">{{ currentUser.username }}</router-link>
+                            </li>
+                            <li class="nav-item float-end ms-md-auto">
+                                <a class="nav-link active" @click.prevent="logOut">로그아웃</a>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -35,6 +51,17 @@
 
 export default {
   name: "Header",
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
 

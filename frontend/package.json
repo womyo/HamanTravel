@@ -16,10 +16,13 @@
     "mitt": "^3.0.0",
     "nouislider": "^15.6.0",
     "path": "^0.12.7",
+    "vee-validate": "^4.6.6",
     "vue": "^3.2.37",
     "vue-geolocation-api": "^0.1.21",
     "vue-router": "^4.1.2",
-    "vue3-naver-maps": "^2.0.0"
+    "vue3-naver-maps": "^2.0.0",
+    "vuex": "^4.0.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

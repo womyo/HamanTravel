@@ -9,7 +9,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   dialectOptions: {
     dateStrings:true,
     typeCast:true
-  }
+  },
+  pool: dbConfig.pool,
 });
 
 const db = {};
@@ -20,5 +21,19 @@ db.sequelize = sequelize;
 db.places = require("./places.model.js")(sequelize, Sequelize);
 db.restaurants = require("./restaurants.model.js")(sequelize, Sequelize);
 db.boards = require("./boards.model.js")(sequelize, Sequelize);
+db.user = require("./user.model.js")(sequelize, Sequelize);
+db.role = require("./role.model.js")(sequelize, Sequelize);
+
+db.role.belongsToMany(db.user, {
+  through: "user_roles",
+  foreignKey: "roleId",
+  otherKey: "userId"
+});
+db.user.belongsToMany(db.role, {
+  through: "user_roles",
+  foreignKey: "userId",
+  otherKey: "roleId"
+});
+db.ROLES = ["user", "admin", "moderator"];
 
 module.exports = db;
