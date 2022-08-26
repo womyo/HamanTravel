@@ -21,23 +21,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 db.sequelize.sync({force: false});
 
-// function initial() {
-//     Role.create({
-//         id: 1,
-//         name: "user"
-//     });
-
-//     Role.create({
-//         id: 2,
-//         name: "moderator"
-//     });
-
-//     Role.create({
-//         id: 3,
-//         name: "admin"
-//     });
-// }
-
 require("./app/routes/places.route")(app);
 
 require("./app/routes/restaurants.route")(app);
