@@ -40,7 +40,7 @@ export default {
 			code:null,
 			title:'',
 			contents:'',
-			userId:'admin',
+			userId:'',
 			form:'',
 			id:this.$route.query.id,
 			options: [
@@ -49,6 +49,11 @@ export default {
 			{ value: "공지", text: "공지" },
 			{ value: "잡담", text: "잡담" },
 			]
+		}
+	},
+	computed: {
+		currentUser() {
+			return this.$store.state.auth.user;
 		}
 	},
 	mounted() { //최초 로딩 시 실행
@@ -61,6 +66,7 @@ export default {
 			axios.get('/api/board/'+this.body.id)
 			.then((res)=>{
 				this.code = res.data.code;
+				this.userId = res.data.userId;
 				this.title = res.data.title;
 				this.contents = res.data.contents.replace(/(\n)/g,'<br/>');
 			})
@@ -90,7 +96,7 @@ export default {
 
 			this.form = { 
 				code: this.code,
-				userId: this.userId,
+				userId: this.currentUser.username,
 				title: this.title,
 				contents: this.contents,
 			} 

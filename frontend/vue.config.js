@@ -13,8 +13,8 @@ module.exports = defineConfig({
   devServer: {
     proxy : {
         '/api' : {
-            target: 'http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com',
-            // target: "http://localhost:3000",
+            // target: 'http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com',
+            target: "http://localhost:3000",
             changeOrigin: true,
             pathRewrite : {
               '^/api' : ''

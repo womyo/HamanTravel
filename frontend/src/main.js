@@ -14,8 +14,8 @@ import mitt from 'mitt'
 const app = createApp(App);
 const emitter = mitt();
 
-axios.defaults.baseURL = 'http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com'
-// axios.defaults.baseURL = "http://localhost:3000"
+// axios.defaults.baseURL = 'http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com'
+axios.defaults.baseURL = "http://localhost:3000"
 
 app.use(router);
 app.use(store);

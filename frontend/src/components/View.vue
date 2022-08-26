@@ -20,9 +20,14 @@
 		</div>
 
 		<div class="btnWrap">
-            <button @click="fnList" class="btn btn-secondary">목록</button>
-            <button @click="fnMod" class="btn btn-info">수정</button>
-            <button @click="fnDeleteProc" class="btn btn-danger">삭제</button>
+			<div v-if="currentUser">
+				<button @click="fnList" class="btn btn-secondary">목록</button>
+				<button v-if="userId === currentUser.username" @click="fnMod" class="btn btn-info">수정</button>
+				<button v-if="userId === currentUser.username" @click="fnDeleteProc" class="btn btn-danger">삭제</button>
+			</div>
+			<div v-else>
+				<button @click="fnList" class="btn btn-secondary">목록</button>
+			</div>
 		</div>	
 	</div>
 </template>
@@ -34,19 +39,26 @@ export default {
 	data() {
 		return {
 			body:this.$route.query,
+			userId: '',
             title: '',
             contents: '',
             createdAt: '',
             updatedAt: ''
 		}
-	}
-	,mounted() {
+	},
+	computed: {
+		currentUser() {
+			return this.$store.state.auth.user;
+		}
+	},
+	mounted() {
 		this.fnGetView();
-	}
-	,methods:{
+	},
+	methods:{
 		fnGetView() {
 			axios.get('/api/board/'+this.body.id)
 			.then((res)=>{
+				this.userId = res.data.userId;
 				this.title = res.data.title;
 				this.contents = res.data.contents.replace(/(\n)/g,'<br/>');
                 this.createdAt = res.data.createdAt;
