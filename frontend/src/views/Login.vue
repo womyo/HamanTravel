@@ -8,7 +8,7 @@
       /> -->
       <Form @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Id</label>
           <Field name="username" type="text" class="form-control" />
           <ErrorMessage name="username" class="error-feedback" />
         </div>
@@ -48,14 +48,20 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      username: yup.string().required("Username is required!"),
-      password: yup.string().required("Password is required!"),
+      username: yup.string().required("아이디를 입력해주세요"),
+      password: yup.string().required("비밀번호를 입력해주세요"),
     });
     return {
       loading: false,
       message: "",
       schema,
+      prevRoute: null
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.prevRoute = from
+    })
   },
   computed: {
     loggedIn() {
@@ -64,7 +70,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.go(-1);
     }
   },
   methods: {
@@ -72,7 +78,7 @@ export default {
       this.loading = true;
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/profile");
+          this.$router.push(this.prevRoute.path);
         },
         (error) => {
           this.loading = false;

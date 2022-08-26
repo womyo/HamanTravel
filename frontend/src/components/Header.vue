@@ -16,28 +16,28 @@
                             <a class="nav-link active" href="/">홈</a>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link active" to="/keyword">키워드 관광</router-link>
+                            <a class="nav-link active" href="/keyword">키워드 관광</a>
                         </li>
                         <li class="nav-item float-end ms-md-auto">
-                            <router-link class="nav-link active" to="/course">코스 추천</router-link>
+                            <a class="nav-link active" href="/course">코스 추천</a>
                         </li>
                         <li class="nav-item float-end ms-md-auto">
-                            <router-link class="nav-link active" to="/community/list">함 말해봐</router-link>
+                            <a class="nav-link active" href="/community/list">함 말해봐</a>
                         </li>
                         <div v-if="!currentUser" class="navbar-nav ml-auto">
                             <li class="nav-item float-end ms-md-auto">
-                                <router-link class="nav-link active" to="/register">가입</router-link>
+                                <a class="nav-link active" href="/register">가입</a>
                             </li>
                             <li class="nav-item float-end ms-md-auto">
-                                <router-link class="nav-link active" to="/login">로그인</router-link>
+                                <a class="nav-link active" href="/login">로그인</a>
                             </li>
                         </div>
                         <div v-if="currentUser" class="navbar-nav ml-auto">
                             <li class="nav-item float-end ms-md-auto">
-                                <router-link class="nav-link active" to="/profile">{{ currentUser.username }}</router-link>
+                                <a class="nav-link active" @click.prevent="">{{ currentUser.username }}</a>
                             </li>
                             <li class="nav-item float-end ms-md-auto">
-                                <a class="nav-link active" @click.prevent="logOut">로그아웃</a>
+                                <a class="nav-link active" href="javascript:;" @click="logOut" >로그아웃</a>
                             </li>
                         </div>
                     </ul>
@@ -59,7 +59,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
+      this.$router.go(0);
     }
   }
 };

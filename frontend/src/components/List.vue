@@ -51,14 +51,19 @@ export default {
 			url: '',
 			body:this.$route.query,
 			options: [
-			{ value: "", text: "말머리", disabled: true},
+			{ value: "", text: "전체"},
 			{ value: "질문", text: "질문" },
 			{ value: "공지", text: "공지" },
 			{ value: "잡담", text: "잡담" },
 			]
 		}
-	}
-	,mounted() { 
+	},
+	computed: {
+		currentUser() {
+			return this.$store.state.auth.user;
+		}
+	},
+	mounted() { 
 		this.getAllRows();
 		this.getListByPage(this.currentPage);
 	},
@@ -101,7 +106,12 @@ export default {
 			})
 		},
 		fnAdd() {
-			this.$router.push("./write");
+			if (!this.currentUser) {
+				this.$router.push('/login');
+			}
+			else {
+				this.$router.push("./write");
+			}
 		},
 		fnView(id) {
 			this.body.id = id;

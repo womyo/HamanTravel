@@ -9,14 +9,14 @@
       <Form @submit="handleRegister" :validation-schema="schema">
         <div v-if="!successful">
           <div class="form-group">
-            <label for="username">Username</label>
-            <Field name="username" type="text" class="form-control" />
-            <ErrorMessage name="username" class="error-feedback" />
-          </div>
-          <div class="form-group">
             <label for="email">Email</label>
             <Field name="email" type="email" class="form-control" />
             <ErrorMessage name="email" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <label for="username">Id</label>
+            <Field name="username" type="text" class="form-control" />
+            <ErrorMessage name="username" class="error-feedback" />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
@@ -59,19 +59,19 @@ export default {
     const schema = yup.object().shape({
       username: yup
         .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
+        .required("아이디를 입력해주세요")
+        .min(3, "길이가 너무 짧습니다")
+        .max(20, "입력 가능 길이를 초과하였습니다"),
       email: yup
         .string()
-        .required("Email is required!")
-        .email("Email is invalid!")
-        .max(50, "Must be maximum 50 characters!"),
+        .required("이메일을 입력해주세요")
+        .email("이메일이 유효하지 않습니다")
+        .max(50, "입력 가능 길이를 초과하였습니다"),
       password: yup
         .string()
-        .required("Password is required!")
-        .min(6, "Must be at least 6 characters!")
-        .max(40, "Must be maximum 40 characters!"),
+        .required("비밀번호를 입력해주세요")
+        .min(6, "비밀번호는 6글자 이상이어야 합니다")
+        .max(40, "입력 가능 길이를 초과하였습니다"),
     });
     return {
       successful: false,
@@ -112,6 +112,7 @@ export default {
           this.loading = false;
         }
       );
+      this.$router.push("/login");
     },
   },
 };
