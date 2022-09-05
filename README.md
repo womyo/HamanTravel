@@ -39,7 +39,7 @@ Haman is a city with many hidden travel spots but it's not well know to people. 
  
  
 ## 4. 링크
-  http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com/community/list
+  http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com/
   
 
 ## 5. 최종 시연 영상
