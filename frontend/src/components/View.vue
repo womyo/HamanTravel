@@ -1,17 +1,17 @@
 <template>
 	<div>
-		<div class="addWrap">
+		<div class="viewWrap">
 			<form>
-				<table class="tbAdd">
+				<table class="tbView">
 					<colgroup>
 						<col width="15%" />
 						<col width="*" />
 					</colgroup>
-					<tr>
+					<tr class="title_table">
 						<th>제목</th>
 						<td>{{title}}</td>
 					</tr>
-					<tr>
+					<tr class="content_table">
 						<th>내용</th>
 						<td class="txt_cont" v-html="contents"></td>
 					</tr>
@@ -96,19 +96,20 @@ export default {
 </script>
 
 <style>
-	.tbAdd{
+	.tbView{
+		background-color: rgba(255,255,255,0.3);
         border-top:1px solid #888;
     }
-	.tbAdd th, .tbAdd td{
+	.title_table th, .title_table td{
         border-bottom:1px solid #eee; 
         padding:5px 0; 
     }
-	.tbAdd td{
+	.tbView td{
         padding:10px 10px; 
         box-sizing:border-box; 
         text-align:left;
     }
-	.tbAdd td.txt_cont{
+	.tbView td.txt_cont{
         height:300px; 
         vertical-align:top;
     }

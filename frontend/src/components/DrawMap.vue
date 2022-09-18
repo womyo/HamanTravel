@@ -102,7 +102,7 @@ export default {
         },
 
         showKeyword() {
-            this.toast.show({title: '키워드', body: '봄, 여름, 가을, 겨울, 체험, 유적지, 등산, 문화, 가볼만한곳'});
+            this.toast.show({title: '키워드', body: '봄, 여름, 가을, 겨울'});
         },
 
         flagChange() {

@@ -26,7 +26,7 @@
                         </li>
                         <div v-if="!currentUser" class="navbar-nav ml-auto">
                             <li class="nav-item float-end ms-md-auto">
-                                <a class="nav-link active" href="/register">가입</a>
+                                <a class="nav-link active" href="/register">회원가입</a>
                             </li>
                             <li class="nav-item float-end ms-md-auto">
                                 <a class="nav-link active" href="/login">로그인</a>

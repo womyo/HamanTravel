@@ -1,7 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 const API_URL = 'http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com/api/test/';
-// const API_URL = 'http://localhost:3000/api/test/';
 class UserService {
   getPublicContent() {
     return axios.get(API_URL + 'all');
