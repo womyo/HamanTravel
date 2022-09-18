@@ -1,5 +1,5 @@
 require('dotenv').config();
 
 module.exports = {
-    secret: "haman-secret-key"
+    secret: process.env.SECRET_KEY,
   };
