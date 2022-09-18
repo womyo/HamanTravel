@@ -10,7 +10,6 @@ const Role = db.role;
 
 let corsOptions = {
     origin: "http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com"
-    // origin: "http://localhost:3000"
 }
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
