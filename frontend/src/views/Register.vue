@@ -1,47 +1,38 @@
 <template>
-  <div class="col-md-12">
-    <div class="card card-container">
-      <!-- <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      /> -->
-      <Form @submit="handleRegister" :validation-schema="schema">
-        <div v-if="!successful">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <Field name="email" type="email" class="form-control" />
-            <ErrorMessage name="email" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label for="username">Id</label>
-            <Field name="username" type="text" class="form-control" />
-            <ErrorMessage name="username" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <Field name="password" type="password" class="form-control" />
-            <ErrorMessage name="password" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
-              <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-              ></span>
-              Sign Up
-            </button>
-          </div>
-        </div>
-      </Form>
-      <div
-        v-if="message"
-        class="alert"
-        :class="successful ? 'alert-success' : 'alert-danger'"
-      >
-        {{ message }}
+  <Form @submit="handleRegister" :validation-schema="schema">
+    <div v-if="!successful">
+      <div class="form-group">
+        <label for="email">이메일</label>
+        <Field name="email" type="email" class="form-control" />
+        <ErrorMessage name="email" class="error-feedback" />
+      </div>
+      <div class="form-group">
+        <label for="username">아이디</label>
+        <Field name="username" type="text" class="form-control" />
+        <ErrorMessage name="username" class="error-feedback" />
+      </div>
+      <div class="form-group">
+        <label for="password">비밀번호</label>
+        <Field name="password" type="password" class="form-control" />
+        <ErrorMessage name="password" class="error-feedback" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" :disabled="loading">
+          <span
+            v-show="loading"
+            class="spinner-border spinner-border-sm"
+          ></span>
+          회원가입
+        </button>
       </div>
     </div>
+  </Form>
+  <div
+    v-if="message"
+    class="alert"
+    :class="successful ? 'alert-success' : 'alert-danger'"
+  >
+    {{ message }}
   </div>
 </template>
 
@@ -59,17 +50,16 @@ export default {
     const schema = yup.object().shape({
       username: yup
         .string()
-        .required("아이디를 입력해주세요")
-        .min(3, "길이가 너무 짧습니다")
+        .required("아이디를 입력해 주세요")
         .max(20, "입력 가능 길이를 초과하였습니다"),
       email: yup
         .string()
-        .required("이메일을 입력해주세요")
+        .required("이메일을 입력해 주세요")
         .email("이메일이 유효하지 않습니다")
         .max(50, "입력 가능 길이를 초과하였습니다"),
       password: yup
         .string()
-        .required("비밀번호를 입력해주세요")
+        .required("비밀번호를 입력해 주세요")
         .min(6, "비밀번호는 6글자 이상이어야 합니다")
         .max(40, "입력 가능 길이를 초과하였습니다"),
     });
@@ -87,7 +77,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push("/");
     }
   },
   methods: {
@@ -118,5 +108,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.error-feedback{
+  color: #9F3A38;
+}
+.form-group{
+  background-color: rgba(255, 255, 255, 0.3);
+}
 </style>

@@ -8,7 +8,6 @@ import Write from '../components/Write'
 import View from '../components/View'
 import Login from '../views/Login'
 import Register from '../views/Register'
-const Profile = () => import("../views/Profile")
 
 const routes = [
     {
@@ -82,16 +81,7 @@ const routes = [
       meta: {
         title: "회원가입",
       },
-		},
-    {
-      path: "/profile",
-      name: Profile,
-      // lazy-loaded
-      component: Profile,
-      meta: {
-        title: "프로필"
-      }
-    },
+		}
 ]
 
 const router = createRouter({
