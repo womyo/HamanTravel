@@ -44,7 +44,7 @@ Haman is a city with many hidden travel spots but it's not well know to people. 
 
 ## 5. 최종 시연 영상
 
-  https://youtube.com/shorts/iPIO1twC6o4?feature=share
+  https://youtu.be/eSNyNCUiBHs
   
  
   
