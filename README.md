@@ -14,35 +14,9 @@
 ### Travel Haman with travel keywords and Current location-based tour course recommendation service
 
 Haman is a city with many hidden travel spots but it's not well know to people. Therefore, this service is designed to help Haman tourists increase their interest and to help them with tourism convenience.
-   
-  
-## 3. 팀 소개
-
-### 팀원
 
 
-- 이인호
-
- 
- ```
- * 역할: Full stack Engineer
- * E-mail: inhoking01@naver.com
- ```
- 
-- 정유정
-
- 
- ```
- * 역할: Project Manager
- * E-mail: godream86@naver.com
- ```
- 
- 
-## 4. 링크
-  http://ec2-15-164-165-238.ap-northeast-2.compute.amazonaws.com/
-  
-
-## 5. 최종 시연 영상
+## 3. 시연 영상
 
   https://youtu.be/eSNyNCUiBHs
   
